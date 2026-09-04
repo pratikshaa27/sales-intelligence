@@ -1,0 +1,25 @@
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+exclude = ["alembic/versions", ".venv"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+ignore = ["B008"]
+
+[tool.black]
+line-length = 100
+target-version = ["py311"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "function"
+testpaths = ["app/tests"]
+# Test env vars (DATABASE_URL, APP_ENV, JWT_SECRET_KEY) are forced explicitly at the top of
+# conftest.py instead of via a .env file: a real DATABASE_URL is already set on the backend
+# container by docker-compose, which a dotenv file's value would not override.
+
+[tool.mypy]
+python_version = "3.11"
+ignore_missing_imports = true
+exclude = ["alembic", ".venv"]

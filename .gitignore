@@ -1,0 +1,51 @@
+# --- Environment / secrets ---
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
+
+# --- Python / backend ---
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+htmlcov/
+.coverage
+coverage.xml
+backend/alembic/versions/__pycache__/
+
+# --- Node / frontend ---
+node_modules/
+.next/
+out/
+frontend/coverage/
+frontend/playwright-report/
+frontend/test-results/
+frontend/tsconfig.tsbuildinfo
+frontend/verify-*.js
+frontend/debug-*.js
+.turbo/
+
+# --- Build artifacts ---
+dist/
+build/
+*.log
+
+# --- OS / editor ---
+.DS_Store
+Thumbs.db
+.vscode/*
+!.vscode/extensions.json
+.idea/
+
+# --- Docker ---
+*.pid
+
+# --- Misc data ---
+uploads/
+*.sqlite3

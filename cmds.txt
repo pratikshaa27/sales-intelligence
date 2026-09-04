@@ -1,0 +1,53 @@
+It's already up
+Service	URL
+Frontend	http://localhost:3002
+Backend API	http://localhost:8010
+API docs (Swagger)	http://localhost:8010/docs
+Postgres	localhost:5434
+Redis	localhost:6379
+Just open http://localhost:3002/register to create your first organization.
+
+Commands
+Start everything (from the repo root):
+
+
+docker compose up --build -d
+-d runs it in the background. Drop -d if you want to watch the logs live in your terminal instead.
+
+Stop everything:
+
+
+docker compose down
+(add -v only if you also want to wipe the Postgres/Redis data volumes — don't use that unless you actually want a clean slate)
+
+Restart just one service (e.g. after editing backend code, though hot-reload usually handles that automatically):
+
+
+docker compose restart backend
+docker compose restart frontend
+Tail logs:
+
+
+docker compose logs -f backend
+docker compose logs -f frontend
+docker compose logs -f worker
+docker compose logs -f            # everything
+Check status:
+
+
+docker compose ps
+Running the test suites
+
+# Backend
+docker compose exec backend pytest -v --cov=app --cov-report=term-missing
+docker compose exec backend black --check .
+docker compose exec backend mypy app --ignore-missing-imports
+
+# Frontend unit/component tests
+docker compose exec frontend npm test
+docker compose exec frontend npm run typecheck
+docker compose exec frontend npm run build
+
+# End-to-end (run from the host, not inside the container — needs a real browser)
+cd frontend
+npx playwright test
